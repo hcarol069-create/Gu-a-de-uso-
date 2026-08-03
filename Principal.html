@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Centro de Ayuda | Lucrum Connect</title>
+
+    <style>
+        :root {
+            --azul-oscuro: #17263c;
+            --azul-medio: #243b5a;
+            --azul-principal: #1684ea;
+            --azul-claro: #eaf4ff;
+            --verde: #4d9b50;
+            --fondo: #f3f6fa;
+            --blanco: #ffffff;
+            --texto: #1c2736;
+            --texto-suave: #667085;
+            --borde: #dce3ec;
+            --sombra: 0 12px 35px rgba(23, 38, 60, 0.10);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            font-family:
+                Inter,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            color: var(--texto);
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(22, 132, 234, 0.08),
+                    transparent 30%
+                ),
+                var(--fondo);
+        }
+
+        header {
+            position: relative;
+            overflow: hidden;
+
+            padding: 68px 24px 105px;
+
+            color: var(--blanco);
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--azul-oscuro),
+                    var(--azul-medio)
+                );
+        }
+
+        header::before {
+            content: "";
+
+            position: absolute;
+            top: -150px;
+            right: -80px;
+
+            width: 320px;
+            height: 320px;
+
+            border-radius: 50%;
+
+            background: rgba(22, 132, 234, 0.14);
+        }
+
+        header::after {
+            content: "";
+
+            position: absolute;
+            bottom: -120px;
+            left: -50px;
+
+            width: 220px;
+            height: 220px;
+
+            border-radius: 50%;
+
+            background: rgba(77, 155, 80, 0.10);
+        }
+
+        .encabezado-contenido {
+            position: relative;
+            z-index: 1;
+
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .etiqueta {
+            display: inline-block;
+
+            margin-bottom: 16px;
+            padding: 8px 15px;
+
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 999px;
+
+            color: #d9ecff;
+            background: rgba(255, 255, 255, 0.08);
+
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+        }
+
+        header h1 {
+            margin: 0;
+
+            font-size: clamp(38px, 6vw, 62px);
+            line-height: 1.05;
+            letter-spacing: -1.8px;
+        }
+
+        header p {
+            max-width: 700px;
+            margin: 19px auto 0;
+
+            color: #d8e1ed;
+
+            font-size: 19px;
+            line-height: 1.6;
+        }
+
+        .buscador-principal {
+            position: relative;
+
+            max-width: 780px;
+            margin: 32px auto 0;
+        }
+
+        .buscador-icono {
+            position: absolute;
+            top: 50%;
+            left: 19px;
+
+            transform: translateY(-50%);
+
+            color: #728195;
+
+            font-size: 20px;
+
+            pointer-events: none;
+        }
+
+        .buscador {
+            width: 100%;
+
+            padding: 18px 20px 18px 52px;
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 14px;
+
+            color: var(--texto);
+            background: rgba(255, 255, 255, 0.98);
+
+            font-size: 16px;
+
+            outline: none;
+
+            box-shadow:
+                0 15px 35px rgba(5, 19, 36, 0.22);
+        }
+
+        .buscador:focus {
+            box-shadow:
+                0 0 0 4px rgba(22, 132, 234, 0.18),
+                0 15px 35px rgba(5, 19, 36, 0.22);
+        }
+
+        .contenedor {
+            position: relative;
+            z-index: 2;
+
+            width: min(1380px, 94%);
+            margin: -48px auto 70px;
+        }
+
+        .panel-introduccion {
+            display: grid;
+            grid-template-columns: 1.4fr 0.8fr;
+            gap: 28px;
+            align-items: center;
+
+            margin-bottom: 34px;
+            padding: 32px;
+
+            border: 1px solid var(--borde);
+            border-radius: 20px;
+
+            background: var(--blanco);
+            box-shadow: var(--sombra);
+        }
+
+        .panel-introduccion h2 {
+            margin: 0 0 12px;
+
+            font-size: 30px;
+            letter-spacing: -0.7px;
+        }
+
+        .panel-introduccion p {
+            margin: 0;
+
+            color: var(--texto-suave);
+
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .perfil {
+            padding: 22px;
+
+            border: 1px solid #cfe0f2;
+            border-radius: 15px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #f8fbff,
+                    #edf5ff
+                );
+        }
+
+        .perfil-superior {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+
+            margin-bottom: 12px;
+        }
+
+        .perfil-icono {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 46px;
+            height: 46px;
+
+            border-radius: 12px;
+
+            color: var(--azul-principal);
+            background: var(--azul-claro);
+
+            font-size: 23px;
+        }
+
+        .perfil h3 {
+            margin: 0 0 3px;
+
+            font-size: 17px;
+        }
+
+        .perfil small {
+            color: var(--texto-suave);
+
+            font-size: 12px;
+        }
+
+        .perfil p {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .seccion {
+            margin-bottom: 38px;
+        }
+
+        .seccion-encabezado {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 25px;
+
+            margin-bottom: 17px;
+        }
+
+        .seccion-encabezado h2 {
+            margin: 0;
+
+            font-size: 25px;
+            letter-spacing: -0.5px;
+        }
+
+        .seccion-encabezado p {
+            max-width: 520px;
+            margin: 0;
+
+            color: var(--texto-suave);
+
+            text-align: right;
+            line-height: 1.5;
+        }
+
+        .tarjetas {
+            display: grid;
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(240px, 1fr)
+                );
+
+            gap: 18px;
+        }
+
+        .tarjeta {
+            position: relative;
+
+            display: flex;
+            flex-direction: column;
+
+            min-height: 220px;
+            padding: 24px;
+
+            overflow: hidden;
+
+            border: 1px solid var(--borde);
+            border-radius: 17px;
+
+            color: var(--texto);
+            background: var(--blanco);
+
+            text-decoration: none;
+
+            box-shadow:
+                0 7px 22px rgba(23, 38, 60, 0.06);
+
+            transition:
+                transform 0.22s ease,
+                box-shadow 0.22s ease,
+                border-color 0.22s ease;
+        }
+
+        .tarjeta::after {
+            content: "";
+
+            position: absolute;
+            right: -45px;
+            bottom: -55px;
+
+            width: 130px;
+            height: 130px;
+
+            border-radius: 50%;
+
+            background: rgba(22, 132, 234, 0.06);
+        }
+
+        .tarjeta:hover {
+            transform: translateY(-5px);
+
+            border-color: rgba(22, 132, 234, 0.42);
+
+            box-shadow:
+                0 16px 36px rgba(23, 38, 60, 0.12);
+        }
+
+        .tarjeta-icono {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 49px;
+            height: 49px;
+
+            margin-bottom: 20px;
+
+            border-radius: 13px;
+
+            color: var(--azul-principal);
+            background: var(--azul-claro);
+
+            font-size: 23px;
+        }
+
+        .tarjeta h3 {
+            margin: 0 0 9px;
+
+            font-size: 19px;
+        }
+
+        .tarjeta p {
+            margin: 0;
+
+            color: var(--texto-suave);
+
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .tarjeta-enlace {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+
+            margin-top: auto;
+            padding-top: 20px;
+
+            color: var(--azul-principal);
+
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .tarjeta-enlace::after {
+            content: "→";
+
+            font-size: 18px;
+
+            transition: transform 0.2s ease;
+        }
+
+        .tarjeta:hover .tarjeta-enlace::after {
+            transform: translateX(4px);
+        }
+
+        .tarjeta.no-disponible {
+            opacity: 0.58;
+            cursor: default;
+        }
+
+        .tarjeta.no-disponible:hover {
+            transform: none;
+
+            border-color: var(--borde);
+
+            box-shadow:
+                0 7px 22px rgba(23, 38, 60, 0.06);
+        }
+
+        .estado {
+            display: inline-block;
+
+            margin-top: 16px;
+            padding: 6px 9px;
+
+            border-radius: 999px;
+
+            color: #6d7785;
+            background: #eef1f4;
+
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .oculta {
+            display: none;
+        }
+
+        .sin-resultados {
+            display: none;
+
+            padding: 28px;
+
+            border: 1px dashed #b8c5d4;
+            border-radius: 14px;
+
+            color: var(--texto-suave);
+            background: rgba(255, 255, 255, 0.75);
+
+            text-align: center;
+        }
+
+        .sin-resultados.visible {
+            display: block;
+        }
+
+        footer {
+            padding: 25px;
+
+            color: var(--texto-suave);
+
+            text-align: center;
+            font-size: 13px;
+        }
+
+        @media (max-width: 900px) {
+            .panel-introduccion {
+                grid-template-columns: 1fr;
+            }
+
+            .seccion-encabezado {
+                display: block;
+            }
+
+            .seccion-encabezado p {
+                margin-top: 8px;
+
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 620px) {
+            header {
+                padding: 52px 18px 88px;
+            }
+
+            header p {
+                font-size: 16px;
+            }
+
+            .contenedor {
+                width: 94%;
+            }
+
+            .panel-introduccion {
+                padding: 22px;
+            }
+
+            .panel-introduccion h2 {
+                font-size: 25px;
+            }
+
+            .tarjetas {
+                grid-template-columns: 1fr;
+            }
+
+            .tarjeta {
+                min-height: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <div class="encabezado-contenido">
+
+            <div class="etiqueta">
+                Centro de ayuda
+            </div>
+
+            <h1>Lucrum Connect</h1>
+
+            <p>
+                Consulta los procedimientos, módulos y funciones disponibles
+                para el perfil Administrador.
+            </p>
+
+            <div class="buscador-index">
+
+                <span class="buscador-icono">
+                    ⌕
+                </span>
+
+                <input
+                    type="text"
+                    id="buscador"
+                    class="buscador"
+                    placeholder="¿Qué necesitas consultar?"
+                >
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <main class="contenedor">
+
+        <section class="panel-introduccion">
+
+            <div>
+
+                <h2>
+                    Manual interactivo de usuario
+                </h2>
+
+                <p>
+                    Selecciona un apartado para consultar instrucciones paso a paso,
+                    capturas explicativas y respuestas a las preguntas más frecuentes
+                    sobre Lucrum Connect.
+                </p>
+
+            </div>
+
+            <div class="perfil">
+
+                <div class="perfil-superior">
+
+                    <div class="perfil-icono">
+                        ⚙
+                    </div>
+
+                    <div>
+                        <h3>Perfil Administrador</h3>
+                        <small>Acceso completo</small>
+                    </div>
+
+                </div>
+
+                <p>
+                    Las capturas y explicaciones de este manual corresponden
+                    a una cuenta con permisos de Administrador.
+                </p>
+
+            </div>
+
+        </section>
+
+        <section class="seccion">
+
+            <div class="seccion-encabezado">
+
+                <h2>Primeros pasos</h2>
+
+                <p>
+                    Acceso inicial, identificación y funcionamiento general
+                    de la plataforma.
+                </p>
+
+            </div>
+
+            <div class="tarjetas">
+
+                <a
+                    class="tarjeta"
+                    href="inicio_sesion.html"
+                    data-busqueda="inicio sesión acceso contraseña correo plataforma"
+                >
+
+                    <div class="tarjeta-icono">
+                        🔑
+                    </div>
+
+                    <h3>Inicio de sesión</h3>
+
+                    <p>
+                        Aprende cómo acceder a Lucrum Connect,
+                        qué datos necesitas y qué ocurre después de identificarte.
+                    </p>
+
+                    <span class="tarjeta-enlace">
+                        Abrir tutorial
+                    </span>
+
+                </a>
+
+                <div
+                    class="tarjeta no-disponible"
+                    data-busqueda="menú principal módulos navegación inicio"
+                >
+
+                    <div class="tarjeta-icono">
+                        ⌂
+                    </div>
+
+                    <h3>Menú principal</h3>
+
+                    <p>
+                        Conoce la pantalla inicial y la organización
+                        de los módulos disponibles.
+                    </p>
+
+                    <span class="estado">
+                        Próximamente
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="seccion">
+
+            <div class="seccion-encabezado">
+
+                <h2>Operaciones</h2>
+
+                <p>
+                    Gestión de la producción, tareas, productos
+                    y recursos utilizados durante la actividad diaria.
+                </p>
+
+            </div>
+
+            <div class="tarjetas">
+
+                <div
+                    class="tarjeta no-disponible"
+                    data-busqueda="producción proyectos obras telecomunicaciones"
+                >
+
+                    <div class="tarjeta-icono">
+                        📊
+                    </div>
+
+                    <h3>Producción</h3>
+
+                    <p>
+                        Consulta la información general de producción
+                        y el seguimiento de las actividades.
+                    </p>
+
+                    <span class="estado">
+                        Próximamente
+                    </span>
+
+                </div>
+
+                <div
+                    class="tarjeta no-disponible"
+                    data-busqueda="tareas crear editar asignar finalizar fotografías"
+                >
+
+                    <div class="tarjeta-icono">
+                        ✓
+                    </div>
+
+                    <h3>Tareas</h3>
+
+                    <p>
+                        Aprende a crear, asignar, completar
+                        y consultar las tareas diarias.
+                    </p>
+
+                    <span class="estado">
+                        Próximamente
+                    </span>
+
+                </div>
+
+                <div
+                    class="tarjeta no-disponible"
+                    data-busqueda="productos artículos material movimientos stock"
+                >
+
+                    <div class="tarjeta-icono">
+                        ◫
+                    </div>
+
+                    <h3>Productos</h3>
+
+                    <p>
+                        Gestión de artículos, materiales
+                        y movimientos de productos.
+                    </p>
+
+                    <span class="estado">
+                        Próximamente
+                    </span>
+
+                </div>
+
+                <div
+                    class="tarjeta no-disponible"
+                    data-busqueda="vehículos coches asignaciones mantenimiento"
+                >
+
+                    <div class="tarjeta-icono">
+                        🚚
+                    </div>
+
+                    <h3>Vehículos</h3>
+
+                    <p>
+                        Consulta vehículos, asignaciones
+                        y datos relacionados con la flota.
+                    </p>
+
+                    <span class="estado">
+                        Próximamente
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="seccion">
+
+            <div class="seccion-encabezado">
+
+                <h2>Administración</h2>
+
+                <p>
+                    Gestión de personas, clientes, configuraciones
+                    y herramientas internas.
+                </p>
+
+            </div>
+
+            <div class="tarjetas">
+
+                <div
+                    class="tarjeta no-disponible"
+                    data-busqueda="recursos humanos empleados usuarios equipos personal"
+                >
+
+                    <div class="tarjeta-icono">
+                        👥
+                    </div>
+
+                    <h3>Recursos humanos</h3>
+
+                    <p>
+                        Gestión de empleados, equipos
+                        y datos asociados al personal.
+                    </p>
+
+                    <span class="estado">
+                        Próximamente
+                    </span>
+
+                </div>
+
+                <div
+                    class="tarjeta no-disponible"
+                    data-busqueda="crm clientes contactos oportunidades"
+                >
+
+                    <div class="tarjeta-icono">
+                        ◉
+                    </div>
+
+                    <h3>CRM</h3>
+
+                    <p>
+                        Consulta y administra información
+                        relacionada con clientes y contactos.
+                    </p>
+
+                    <span class="estado">
+                        Próximamente
+                    </span>
+
+                </div>
+
+                <div
+                    class="tarjeta no-disponible"
+                    data-busqueda="definiciones configuración códigos parámetros"
+                >
+
+                    <div class="tarjeta-icono">
+                        ⚙
+                    </div>
+
+                    <h3>Definiciones</h3>
+
+                    <p>
+                        Configura valores, códigos
+                        y parámetros utilizados en la plataforma.
+                    </p>
+
+                    <span class="estado">
+                        Próximamente
+                    </span>
+
+                </div>
+
+                <div
+                    class="tarjeta no-disponible"
+                    data-busqueda="workspace documentos archivos trabajo"
+                >
+
+                    <div class="tarjeta-icono">
+                        ▣
+                    </div>
+
+                    <h3>Workspace</h3>
+
+                    <p>
+                        Consulta las herramientas
+                        y recursos disponibles en el espacio de trabajo.
+                    </p>
+
+                    <span class="estado">
+                        Próximamente
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <div
+            id="sin-resultados"
+            class="sin-resultados"
+        >
+            No se encontraron apartados relacionados con la búsqueda.
+        </div>
+
+    </main>
+
+    <footer>
+        Lucrum Connect · Centro de ayuda · Perfil Administrador
+    </footer>
+
+    <script>
+        const buscador = document.getElementById("buscador");
+        const tarjetas = document.querySelectorAll(".tarjeta");
+        const secciones = document.querySelectorAll(".seccion");
+        const sinResultados = document.getElementById("sin-resultados");
+
+        buscador.addEventListener("input", () => {
+            const texto = buscador.value
+                .toLowerCase()
+                .trim();
+
+            let resultadosVisibles = 0;
+
+            tarjetas.forEach((tarjeta) => {
+                const contenido = (
+                    tarjeta.textContent +
+                    " " +
+                    tarjeta.dataset.busqueda
+                ).toLowerCase();
+
+                if (contenido.includes(texto)) {
+                    tarjeta.classList.remove("oculta");
+                    resultadosVisibles++;
+                } else {
+                    tarjeta.classList.add("oculta");
+                }
+            });
+
+            secciones.forEach((seccion) => {
+                const tarjetasVisibles = seccion.querySelectorAll(
+                    ".tarjeta:not(.oculta)"
+                );
+
+                if (tarjetasVisibles.length === 0) {
+                    seccion.classList.add("oculta");
+                } else {
+                    seccion.classList.remove("oculta");
+                }
+            });
+
+            if (resultadosVisibles === 0) {
+                sinResultados.classList.add("visible");
+            } else {
+                sinResultados.classList.remove("visible");
+            }
+        });
+    </script>
+
+</body>
+
+</html>
